@@ -6,7 +6,7 @@ from matplotlib import gridspec
 
 LOCAL_PATH = '.received_data.pickle'
 
-def visualize():
+def visualize(channel):
     time = []
     data = []
 
@@ -39,7 +39,7 @@ def visualize():
         
             
     plt.plot(time, data)
-    plt.title('Oscilloscope Channel 1')
+    plt.title('Oscilloscope Channel {}'.format(channel))
     plt.ylabel('Voltage (V)')
     plt.xlabel('Time ({})'.format(tUnit))
     plt.xlim(time[0], time[-1])

@@ -170,4 +170,4 @@ if __name__ == "__main__":
     else:
         logging.info('Closing connection.')
         ssh_client.close()
-        vis.visualize()
+        vis.visualize(osc_params['channel'])
