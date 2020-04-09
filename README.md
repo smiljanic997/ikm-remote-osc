@@ -29,7 +29,7 @@ Za detaljan opis načina na koji se aplikacija poziva pokrenuti `python3 read_rp
 
 Prvo je potrebno pozicionirati se u direktorijum gdje se nalaze `.py` skripte.
 
-Otvoriti terminal pokrenuti skriptu `read_rpi.py`.
+Otvoriti terminal pokrenuti skriptu `read_rpi.py`, na sljedeći način:
 
 ​			`python3 read_rpi.py proxy50.rt3.io 39489`
 
