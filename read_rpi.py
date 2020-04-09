@@ -112,12 +112,17 @@ def get_input(input_type):
             user_input = input('Trigger level[V]? ')
             if re.fullmatch(exp, user_input):
                 break
+    elif input_type == 'sweep':
+        while True:
+            user_input = input('Trigger sweep[SING, AUTO, NORM]? ')
+            if user_input.upper() == 'SING' or user_input.upper() == 'AUTO' or user_input.upper() == 'NORM':
+                break  
     return user_input
 
 
 def get_oscilloscope_params():
     if not path.exists('.previous_osc_params.pickle'):
-        default_osc_params = {'channel': '1', 's_div': '0.5', 'v_div': '2',
+        default_osc_params = {'channel': '1', 's_div': '0.5', 'v_div': '2', 'sweep' : 'SING',
                               'trig_type': 'EDGE', 'trig_slope': 'NEG', 'trig_level': '2'}
         with open('.previous_osc_params.pickle', 'wb') as f:
             pickle.dump(default_osc_params, f,
@@ -135,8 +140,9 @@ def get_oscilloscope_params():
             osc_params['channel'] = get_input('channel')
             osc_params['s_div'] = get_input('s_div')
             osc_params['v_div'] = get_input('v_div')
-            osc_params['trig_type'] = get_input('trig_type')
-            osc_params['trig_slope'] = get_input('trig_slope')
+            osc_params['trig_type'] = get_input('trig_type').upper()
+            osc_params['sweep'] = get_input('sweep').upper()
+            osc_params['trig_slope'] = get_input('trig_slope').upper()
             osc_params['trig_level'] = get_input('trig_level')
             dump_in_file(osc_params)
             break
@@ -149,8 +155,8 @@ if __name__ == "__main__":
 
     try:
         osc_params = get_oscilloscope_params()
-        command = 'sudo python3 /home/pi/slaven/testing_py/scope_settings1.py channel={} trigger_mode={} sweep=SING trig_level={} volt_scale={} time_scale={} --edge_sens=0.5 --edge_slope={} --chann1_offset=0 --chann2_offset=-5'.format(
-            osc_params['channel'], osc_params['trig_type'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'])
+        command = 'sudo python3 /home/pi/slaven/testing_py/scope_settings1.py channel={} trigger_mode={} sweep={} trig_level={} volt_scale={} time_scale={} --edge_sens=0.5 --edge_slope={} --chann1_offset=0 --chann2_offset=-5'.format(
+            osc_params['channel'], osc_params['trig_type'], osc_params['sweep'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'])
 
         print(command)
         ssh_client = open_connection(connection_params)
