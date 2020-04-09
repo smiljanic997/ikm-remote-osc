@@ -14,7 +14,7 @@ def visualize():
     with open(LOCAL_PATH, 'rb') as f:
         received_dict = pickle.load(f)
 
-    data = np.frombuffer(received_dict['rawdata_1'], 'B')
+    data = np.frombuffer(received_dict['rawdata'], 'B')
     voltoffset = received_dict['voltoffset']
     voltscale = received_dict['voltscale']
     timeoffset = received_dict['timeoffset']
@@ -43,6 +43,8 @@ def visualize():
     plt.ylabel('Voltage (V)')
     plt.xlabel('Time ({})'.format(tUnit))
     plt.xlim(time[0], time[-1])
+    
+    plt.grid()
     plt.show()
 
 # $ python3 read_rpi.py proxy51.rt3.io 39429
