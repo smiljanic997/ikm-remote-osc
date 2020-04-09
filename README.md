@@ -4,7 +4,7 @@
 Skripte koje se nalaze na ovoj grani repozitorijuma su potrebne za komunikaciju Raspberry Pi 3 platforme sa osciloskopom Rigol DS1000D. Python skripte koje su neophodne za ispravan rad su _scope_settings1.py_ i skripte unutar foldera _usbtmc_, te za njih je neophodno da se nalaze na putanji _/home/pi/oscil-remote-access_. Skripta _scope_settings1.py_ se poziva sa host uređaja pokretanjem skripte _read_rpi_, te zbog toga je neophodno da se nalazi na datoj putanji.
 
 Skripta _scope_status.py_ je skripta koja ispisuje trenutna podešavanja osciloskopa te je korisna za provjeru parametara, pokreće se komandom `python3 scope_status.py`. Rezultat poziva skripte je prikazan na slici ispod: 
-![Scope status](/home/milan/Desktop/status.png)
+![Scope status](https://user-images.githubusercontent.com/45833725/78932976-c798dd80-7aa8-11ea-8996-f25945b5dfa3.png)
 Skripta _square_wave_test.py_ je pomoćna skripta za generisanje impulsa na GPIO 13 pinu na Raspberry Pi 3 platformi. Izlaz iz skripte je moguć pritiskom stastera `Ctrl + C`
 
 ## Uputstvo
