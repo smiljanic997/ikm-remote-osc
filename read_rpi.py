@@ -11,6 +11,9 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s : %(message)s')
 
 
 def create_parser():
+    """
+    Creates parser instance and adds arguments. Returns parser object.
+    """
     parser = argparse.ArgumentParser(
         prog='IKM_OscRemote', description='IKM oscilloscope remote access.', argument_default=argparse.SUPPRESS)
     parser.add_argument(
@@ -27,6 +30,9 @@ def create_parser():
 
 
 def get_connection_params(args):
+    """
+    Parses command line arguments. Returns a dictionary.
+    """
     if args.username is None and args.password is None:
         logging.warning(
             'Using default username("pi") and password("raspberry").\n')
@@ -72,11 +78,20 @@ def open_connection(connection_params):
 
 
 def dump_in_file(osc_params):
+    """
+    Write oscilloscope parameters to file.
+    Pickle is used since I don't want noone to change this manually.
+    """
     with open('.previous_osc_params.pickle', 'wb') as f:
         pickle.dump(osc_params, f, protocol=pickle.DEFAULT_PROTOCOL)
 
 
 def get_input(input_type):
+    """
+    Oscilloscope is too expensive to let someone send it garbage. 
+    This funcion checks if given oscilloscope parameter is correct.
+    Returns parameter as string.
+    """
     # this regex matches decimals(both floats and ints)
     exp = '^[0-9]\d*(\.\d+)?$'
     user_input = ''
@@ -121,6 +136,9 @@ def get_input(input_type):
 
 
 def get_oscilloscope_params():
+    """
+    Get oscilloscope parameters from std input. Returns a dictionary.
+    """
     if not path.exists('.previous_osc_params.pickle'):
         default_osc_params = {'channel': '1', 's_div': '0.5', 'v_div': '2', 'sweep' : 'SING',
                               'trig_type': 'EDGE', 'trig_slope': 'NEG', 'trig_level': '2'}
@@ -160,7 +178,7 @@ if __name__ == "__main__":
 
         ssh_client = open_connection(connection_params)
         stdin, stdout, stderr = ssh_client.exec_command(command)
-        print(stdout.readlines())
+        print(stdout.readlines()[-1]) # just last line
         receive_file(ssh_client, '/home/pi/slaven/testing_py/.to_send.pickle', vis.LOCAL_PATH)  # TODO > try tempfile here
     except paramiko.AuthenticationException:
         logging.error(
