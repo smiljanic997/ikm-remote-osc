@@ -45,7 +45,7 @@ Ako je osciloskop u EDGE modu, sada se čeka na detekciju signala.
 
 *Sada pokrenuti C kod koji se tiče laboratorijske vježbe.* 
 
-Dostavljanje slike može trajati desetak sekundi. To je zbog toga što se svaki put moraju podesiti parametri osciloskopa.
+Dostavljanje slike može trajati desetak sekundi. Ovo zavisi od parametara koji se odaberu, prvenstveno od s/div*. 
 
 Slika se prikazuje u novom prozoru. U donjem lijevom uglu date su neke opcije za manipulaciju slikom. Bitno je to da, ako vam je ta slika potrebna poslije, istu sačuvate, pošto se fajl na RPi iz koga se generiše slika svaki put popunjava novim vrijednostima.
 
