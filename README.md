@@ -44,3 +44,5 @@ Nakon toga, slijedi konekcija. Ako se konekcija uspostavi, dobija se prikaz na k
 Ako je osciloskop u EDGE modu, sada se čeka na detekciju signala.
 
 *Sada pokrenuti C kod koji se tiče laboratorijske vježbe.* 
+
+Dostavljanje slike može trajati desetak sekundi. To je zbog toga što se svaki put moraju podesiti parametri osciloskopa.
