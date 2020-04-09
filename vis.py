@@ -7,6 +7,10 @@ from matplotlib import gridspec
 LOCAL_PATH = '.received_data.pickle'
 
 def visualize(channel):
+    """
+    De-pickling and data adjusting.
+    Creates a figure and plots data.
+    """
     time = []
     data = []
 
@@ -46,5 +50,3 @@ def visualize(channel):
     
     plt.grid()
     plt.show()
-
-# $ python3 read_rpi.py proxy51.rt3.io 39429
