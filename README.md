@@ -24,3 +24,5 @@ U direktorijumu gdje se nalazi kod, pokrenuti:
 ### Pokretanje aplikacije
 
 Za detaljan opis načina na koji se aplikacija poziva pokrenuti `python3 read_rpi.py -h`
+
+***to be added***
