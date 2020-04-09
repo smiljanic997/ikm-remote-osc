@@ -158,7 +158,6 @@ if __name__ == "__main__":
         command = 'sudo python3 /home/pi/slaven/testing_py/scope_settings1.py channel={} trigger_mode={} sweep={} trig_level={} volt_scale={} time_scale={} --edge_sens=0.5 --edge_slope={} --chann1_offset=0 --chann2_offset=-5'.format(
             osc_params['channel'], osc_params['trig_type'], osc_params['sweep'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'])
 
-        print(command)
         ssh_client = open_connection(connection_params)
         stdin, stdout, stderr = ssh_client.exec_command(command)
         print(stdout.readlines())
