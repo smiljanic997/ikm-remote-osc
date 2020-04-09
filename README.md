@@ -6,7 +6,7 @@ Skripte koje se nalaze na ovoj grani repozitorijuma su potrebne za komunikaciju 
 Skripta _scope_status.py_ je skripta koja ispisuje trenutna podešavanja osciloskopa te je korisna za provjeru parametara, pokreće se komandom `python3 scope_status.py`. Rezultat poziva skripte je prikazan na slici ispod: 
 ![Scope status](https://user-images.githubusercontent.com/45833725/78932976-c798dd80-7aa8-11ea-8996-f25945b5dfa3.png)
 
-Skripta _square_wave_test.py_ je pomoćna skripta za generisanje impulsa na GPIO 13 pinu na Raspberry Pi 3 platformi. Izlaz iz skripte je moguć pritiskom stastera `Ctrl + C`
+Skripta _square_wave_test.py_ je pomoćna skripta za generisanje impulsa na GPIO 14 pinu na Raspberry Pi 3 platformi. Izlaz iz skripte je moguć pritiskom stastera `Ctrl + C`
 
 ## Uputstvo
 1. Nakon pristupa Raspberry Pi 3 platformi sa host uređaja, pozicionirati se u folder _/home/pi/_ komandom `cd /home/pi`.
