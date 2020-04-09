@@ -35,7 +35,7 @@ Otvoriti terminal pokrenuti skriptu `read_rpi.py`.
 
 **!!!** Umjesto `proxy50.rt3.io` i `39489` unijeti dobijene pristupne parametre. **!!!** Ako nisu dobri ovi parametri, dolazi do *exception*-a. Generalno, ako se desi *exception*, prvo ovo dvoje provjeriti.
 
-Prvo se radi podešavanje osciloskopa. Moguće je izabrati opciju da se osciloskop podesi prethodno unešenim parametrima(parametrima koji su unešeni pri prethodnom pokretanju aplikacije). Druga opcija je da se parametri ponovo unesu.
+Prvo se radi podešavanje osciloskopa. Moguće je izabrati opciju da se osciloskop podesi prethodno unešenim parametrima(parametrima koji su unešeni pri prethodnom pokretanju aplikacije; ova opcija se može izabrati i pri prvom pokretanju, tada se koriste parametri koji su se dobro pokazali na testnim signalima). Druga opcija je da se parametri ponovo unesu.
 
 Nakon toga, slijedi konekcija. Ako se konekcija uspostavi, dobija se prikaz na konzoli 
 
