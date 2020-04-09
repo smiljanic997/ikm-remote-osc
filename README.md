@@ -5,7 +5,7 @@
 
 Ovaj dio je neophodno pokrenuti samo jednom.
 
-1. Instralacija **Python3**
+1. Instalacija **Python3**
 
 `sudo apt-get update`
 
