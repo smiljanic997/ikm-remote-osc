@@ -6,6 +6,8 @@ import pickle
 from os import path
 import re
 import vis
+import threading
+import time
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s : %(message)s')
 
@@ -134,6 +136,10 @@ def get_input(input_type):
                 break  
     return user_input
 
+def run_c_code():
+    time.sleep(4)
+    print('Pokreni C kod!')
+
 
 def get_oscilloscope_params():
     """
@@ -170,6 +176,7 @@ def get_oscilloscope_params():
 if __name__ == "__main__":
     parser = create_parser()
     connection_params = get_connection_params(parser.parse_args())
+    run_c_code_thread = threading.Thread(target=run_c_code)
 
     try:
         osc_params = get_oscilloscope_params()
@@ -177,6 +184,7 @@ if __name__ == "__main__":
             osc_params['channel'], osc_params['trig_type'], osc_params['sweep'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'])
 
         ssh_client = open_connection(connection_params)
+        run_c_code_thread.start()
         stdin, stdout, stderr = ssh_client.exec_command(command)
         print(stdout.readlines()[-1]) # just last line
         receive_file(ssh_client, '/home/pi/oscil-remote-access/.to_send.pickle', vis.LOCAL_PATH)  # TODO > try tempfile here
