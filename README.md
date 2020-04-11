@@ -1,6 +1,8 @@
 # Remote Oscilloscope Access
 ## Uputstvo
 
+**Ovaj kod je potrebno download-ovati na Linux OS, na računar, a ne na RPi. Nije testirano na Windows-u**
+
 ### Instalacija neophodnih paketa
 
 Ovaj dio je neophodno pokrenuti samo jednom.
