@@ -23,7 +23,15 @@ U direktorijumu gdje se nalazi kod, pokrenuti:
 
 `sudo python3 setup.py install`
 
-Moguće je da sam zaboravio da dodam neki *dependency*. U tom slučaju se taj paket koji fali može instalirati sa `pip3 install naziv_paketa` .
+Moguće je da sam zaboravio da dodam neki *dependency*. U tom slučaju se taj paket koji fali može instalirati sa `pip3 install naziv_paketa`. 
+
+Takođe, ako ni `setup.py` ne prođe bez grešaka, najbolje je te module instalirati ručno, iz konzole: 
+
+`sudo pip3 install paramiko`, 
+
+`sudo apt install python3-numpy`i 
+
+`sudo apt-get install python3-matlotlib`. 
 
 ### Pokretanje aplikacije
 
