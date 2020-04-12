@@ -12,7 +12,7 @@ Ovaj dio je neophodno pokrenuti samo jednom.
 `sudo apt-get install python3-pip`
 
 2. Instalacija *dependency*-ja 
- 
+
 `sudo pip3 install paramiko`, 
 
 `sudo apt install python3-numpy`
@@ -31,13 +31,15 @@ Otvoriti terminal pokrenuti skriptu `read_rpi.py`, na sljedeći način:
 
 **!!!** Umjesto `proxy50.rt3.io` i `39489` unijeti dobijene pristupne parametre. **!!!** Ako nisu dobri ovi parametri, dolazi do *exception*-a. Generalno, ako se desi *exception*, prvo ovo dvoje provjeriti.
 
-Prvo se radi podešavanje osciloskopa. Moguće je izabrati opciju da se osciloskop podesi prethodno unešenim parametrima(parametrima koji su unešeni pri prethodnom pokretanju aplikacije; ova opcija se može izabrati i pri prvom pokretanju, tada se koriste parametri koji su se dobro pokazali na testnim signalima). Druga opcija je da se parametri ponovo unesu.
+Prvo se radi podešavanje osciloskopa. Moguće je izabrati opciju da se osciloskop podesi prethodno unešenim parametrima(parametrima koji su unešeni pri prethodnom pokretanju aplikacije). Druga opcija je da se parametri ponovo unesu sa standardnog ulaza.
+
+
 
 Nakon toga, slijedi konekcija. Ako se konekcija uspostavi, dobija se prikaz na konzoli 
 
 `INFO : Authentication (password) successful!`
 
-Ako je osciloskop u EDGE modu, sada se čeka na detekciju signala.
+Osciloskop je podešen tako da radi u EDGE trigger mode-u, sa SINGLE sweep-om.
 
 Kada se pojavi poruka, pokrenuti C kod koji se tiče laboratorijske vježbe.
 
@@ -45,6 +47,6 @@ Dostavljanje slike može trajati desetak sekundi. Ovo zavisi od parametara koji 
 
 Slika se prikazuje u novom prozoru. U donjem lijevom uglu date su neke opcije za manipulaciju slikom. Bitno je to da, ako vam je ta slika potrebna poslije, istu sačuvate, pošto se fajl na RPi iz koga se generiše slika svaki put popunjava novim vrijednostima.
 
-**Bitno** - ako se klijentski proces nasilno zatvori(`Ctrl+C `), serverska aplikacija ostaje pokrenuta, te se mora i ona nasilno ubiti, da bi se nastavilo sa radom. To radite tako što, na RPi kucate `ps -aux`, pronađete `pid` procesa koji u imenu imaju `scope_settings1.py`(ili jedan ili dva ovakva procesa), te ih `kill`-ujete sa komandom `sudo kill -9 pid`. Način da provjerite da niste zakočili osciloskop je da na RPi pokrenete `python3 scope_status.py`(u folderu oscil-remote-access) . Kao rezultat ne smijete dobiti `Recourse busy`.
+**Bitno** - ako se klijentski proces nasilno zatvori(`Ctrl+C `), serverska aplikacija ostaje pokrenuta još 60 sekundi. Tek nakon tog vremena se može opet komunicirati sa osciloskopom.
 
 Bagovi i prijedlozi se mogu prijaviti u sekciji [Issues](https://github.com/smiljanic997/ikm-remote-osc/issues).
