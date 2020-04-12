@@ -94,12 +94,19 @@ def get_input(input_type):
     This funcion checks if given oscilloscope parameter is correct.
     Returns parameter as string.
     """
-    # this regex matches decimals(both floats and ints)
+    # this regex matches decimals(both floats and ints), just positive numbers
     exp = '^[0-9]\d*(\.\d+)?$'
+    
+    exp2 = '^-?[0-9]\d*(\.\d+)?$' # can match negative numbers
     user_input = ''
     if input_type == 'channel':
         while True:
-            user_input = input('Broj kanala(1/2)? ')
+            user_input = input('Broj kanala(1/2/oba)? ')
+            if user_input == '1' or user_input == '2' or user_input=='oba':
+                break
+    elif input_type == 'trig_source':
+        while True:
+            user_input = input('Trigger source(1/2)? ')
             if user_input == '1' or user_input == '2':
                 break
     elif input_type == 's_div':
@@ -114,11 +121,24 @@ def get_input(input_type):
             if re.fullmatch(exp, user_input):
                 if float(user_input) < 50.0:
                     break
-    elif input_type == 'trig_type':
+    elif input_type == 'chan1_offset':
         while True:
-            user_input = input('Trigger type[EDGE, PULSE]? ')
-            if user_input.upper() == 'EDGE' or user_input.upper() == 'PULSE':
-                break
+            user_input = input('Channel 1 offset[V]? ')
+            if re.fullmatch(exp2, user_input):
+                if float(user_input) < 50.0:
+                    break
+    elif input_type == 'chan2_offset':
+        while True:
+            user_input = input('Channel 2 offset[V]? ')
+            if re.fullmatch(exp2, user_input):
+                if float(user_input) < 50.0:
+                    break 
+    elif input_type == 'time_offset':
+        while True:
+            user_input = input('Time offset[sec]? ')
+            if re.fullmatch(exp2, user_input):
+                if float(user_input) < 50.0:
+                    break 
     elif input_type == 'trig_slope':
         while True:
             user_input = input('Trigger slope[POS, NEG]? ')
@@ -129,11 +149,6 @@ def get_input(input_type):
             user_input = input('Trigger level[V]? ')
             if re.fullmatch(exp, user_input):
                 break
-    elif input_type == 'sweep':
-        while True:
-            user_input = input('Trigger sweep[SING, AUTO, NORM]? ')
-            if user_input.upper() == 'SING' or user_input.upper() == 'AUTO' or user_input.upper() == 'NORM':
-                break  
     return user_input
 
 def run_c_code():
@@ -146,8 +161,8 @@ def get_oscilloscope_params():
     Get oscilloscope parameters from std input. Returns a dictionary.
     """
     if not path.exists('.previous_osc_params.pickle'):
-        default_osc_params = {'channel': '1', 's_div': '0.5', 'v_div': '2', 'sweep' : 'SING',
-                              'trig_type': 'EDGE', 'trig_slope': 'NEG', 'trig_level': '2'}
+        default_osc_params = {'channel': '1', 's_div': '0.5', 'v_div': '2', 'chan1_offset' : '0',
+                              'chan2_offset': '-5', 'trig_slope': 'NEG', 'trig_level': '2', 'time_offset' : '0', 'trig_source' : '1'}
         with open('.previous_osc_params.pickle', 'wb') as f:
             pickle.dump(default_osc_params, f,
                         protocol=pickle.DEFAULT_PROTOCOL)
@@ -161,13 +176,26 @@ def get_oscilloscope_params():
                 osc_params = pickle.load(f)
             break
         elif use_prev_params == 'n':
-            osc_params['channel'] = get_input('channel')
+            channel = get_input('channel').upper()
+            osc_params['channel'] = '0' if channel == 'OBA' else channel
             osc_params['s_div'] = get_input('s_div')
             osc_params['v_div'] = get_input('v_div')
-            osc_params['trig_type'] = get_input('trig_type').upper()
-            osc_params['sweep'] = get_input('sweep').upper()
+            if osc_params['channel'] == '0':
+                osc_params['chan1_offset'] = get_input('chan1_offset')
+                osc_params['chan2_offset'] = get_input('chan2_offset')
+            elif osc_params['channel'] == '1':
+                osc_params['chan1_offset'] = get_input('chan1_offset')
+                osc_params['chan2_offset'] = '-5'
+            elif osc_params['channel'] == '2':
+                osc_params['chan2_offset'] = get_input('chan2_offset')
+                osc_params['chan1_offset'] = '0'
+            osc_params['time_offset'] = get_input('time_offset')
             osc_params['trig_slope'] = get_input('trig_slope').upper()
             osc_params['trig_level'] = get_input('trig_level')
+            if osc_params['channel'] == '0':
+                osc_params['trig_source'] = get_input('trig_source')
+            else:
+                osc_params['trig_source'] = osc_params['channel']
             dump_in_file(osc_params)
             break
     return osc_params
@@ -180,9 +208,9 @@ if __name__ == "__main__":
 
     try:
         osc_params = get_oscilloscope_params()
-        command = 'sudo python3 /home/pi/oscil-remote-access/scope_settings1.py channel={} trigger_mode={} sweep={} trig_level={} volt_scale={} time_scale={} --edge_sens=0.5 --edge_slope={} --chann1_offset=0 --chann2_offset=-5'.format(
-            osc_params['channel'], osc_params['trig_type'], osc_params['sweep'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'])
-
+        print('Trigger: EDGE (SINGLE sweep)')
+        command = 'sudo python3 /home/pi/oscil-remote-access/scope_settings_2chan.py channel={} trigger_mode=EDGE sweep=SING trig_level={} volt_scale={} time_scale={} --edge_sens=0.5 --edge_slope={} --chann1_offset={} --chann2_offset={} --time_offset={} --trigger_source={}'.format(
+            osc_params['channel'], osc_params['trig_level'], osc_params['v_div'], osc_params['s_div'], osc_params['trig_slope'], osc_params['chan1_offset'], osc_params['chan2_offset'], osc_params['time_offset'], osc_params['trig_source'])
         ssh_client = open_connection(connection_params)
         run_c_code_thread.start()
         stdin, stdout, stderr = ssh_client.exec_command(command)
@@ -201,4 +229,4 @@ if __name__ == "__main__":
     else:
         logging.info('Closing connection.')
         ssh_client.close()
-        vis.visualize(osc_params['channel'])
+        vis.visualize(osc_params)
