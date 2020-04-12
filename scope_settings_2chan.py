@@ -40,7 +40,8 @@ def args_dict(args):
     return string_args
 
 if __name__ == "__main__":
-
+    
+    MAX_TIME = 60
     start_time = time.time()
     parser = create_parser()
     scope_params = args_dict(parser.parse_args())
@@ -148,13 +149,13 @@ if __name__ == "__main__":
         time.sleep(1)
     print("Podaci su popunjeni!")
     count = 0
-    while("STOP" != instr.ask(":TRIG:STAT?")):
+    while(("STOP" != instr.ask(":TRIG:STAT?")) & (count < MAX_TIME)):
         time.sleep(1)
         count += 1
     if "STOP" != instr.ask(":TRIG:STAT?"):
         print("Aplikacija je izasla iz programa nakon 60 sekundi.")
-    instr.write(":STOP")
-    time.sleep(1)
+        instr.write(":STOP")
+        time.sleep(1)
     # Prikupljanje podataka 
     rawdata_1   = instr.ask_raw(str.encode(":WAV:DATA? CHAN1"))[10:]
     rawdata_2   = instr.ask_raw(str.encode(":WAV:DATA? CHAN2"))[10:]
