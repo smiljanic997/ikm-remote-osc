@@ -17,7 +17,7 @@ Ovaj dio je neophodno pokrenuti samo jednom.
 
 `sudo apt install python3-numpy`
 
-`sudo apt-get install python3-matlotlib`. 
+`sudo apt install python3-matlotlib`. 
 
 ### Pokretanje aplikacije
 
