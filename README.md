@@ -15,4 +15,6 @@ Skripta _square_wave_test.py_ je pomoćna skripta za generisanje impulsa na GPIO
 4. Pozicionirati se u direktorijum _ikm-remote-osc_ komandom `cd ikm-remote-osc`
 5. Izvršiti prelazak na granu _oscil-remote-access_ komandom `git checkout oscil-remote-access`
 6. Kopirati željene datoteke komandom `cp -r scope_settings1.py scope_status.py square_wave_test.py usbtmc /home/pi/oscil-remote-access`
-7. Nakon prethodnog koraka, Raspberry Pi je spreman za komunikaciju sa osciloskopom. Ukoliko želite obrisati klonirani direktorijum, potrebno je pozicionirati se u direktorijum iznad komandom `cd ..`, a zatim obrisati direktorijum i datoteke unutar njega komandom `sudo rm -r ikm-remote-osc`
+7. Pozicionirati se u direktorijum `/home/pi/oscil-remote-access/usbtmc` sa komandom `cd /home/pi/oscil-remote-access/usbtmc`, zatim pokrenuti instalaciju _usbtmc_ biblioteke komandom `python3 setup.py install`
+8. Po završetku instalacije, potrebno je instalirati i modul _pyusb_ komandom `pip3 install pyusb`. Ukoliko niste sigurni da imate modul _pip3_, provjerite komandom `pip3 --version`, ukoliko sistem ne prepoznaje komandu potrebno je instalirajti modul komandom `sudo install python3-pip` nakon čega možete pokrenuti instalaciju _pyusb_ modula.
+9. Nakon prethodnog koraka, Raspberry Pi je spreman za komunikaciju sa osciloskopom. Ukoliko želite obrisati klonirani direktorijum, potrebno je pozicionirati se u direktorijum iznad komandom `cd /home/pi`, a zatim obrisati direktorijum i datoteke unutar njega komandom `sudo rm -r ikm-remote-osc`
