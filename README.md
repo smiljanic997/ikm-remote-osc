@@ -7,31 +7,17 @@
 
 Ovaj dio je neophodno pokrenuti samo jednom.
 
-1. Instalacija **Python3**
-
-`sudo apt-get update`
-
-`sudo apt-get install python3.6`
-
-2. Instalacija **pip**
+1. Instalacija **pip**
 
 `sudo apt-get install python3-pip`
 
-3. Instalacija *dependency*-ja 
-
-U direktorijumu gdje se nalazi kod, pokrenuti:
-
-`sudo python3 setup.py install`
-
-Moguće je da sam zaboravio da dodam neki *dependency*. U tom slučaju se taj paket koji fali može instalirati sa `pip3 install naziv_paketa`. 
-
-Takođe, ako ni `setup.py` ne prođe bez grešaka, najbolje je te module instalirati ručno, iz konzole: 
-
+2. Instalacija *dependency*-ja 
+ 
 `sudo pip3 install paramiko`, 
 
-`sudo apt install python3-numpy`i 
+`sudo apt install python3-numpy`
 
-`sudo apt-get install python3-matlotlib`. 
+`sudo apt install python3-matlotlib`. 
 
 ### Pokretanje aplikacije
 
