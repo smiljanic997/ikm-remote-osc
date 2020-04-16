@@ -19,6 +19,10 @@ Ovaj dio je neophodno pokrenuti samo jednom.
 
 `sudo apt install python3-matlotlib`. 
 
+Takođe, neke distribucije nemaju preinstaliran interfejs za crtanje(*Tkinter*). Provjera da li *tkinter* postoji se vrši sa `python3 -m tkinter`. Ukoliko ovo vrati grešku, potrebno je instalirati `tkinter` komandom:
+
+`sudo apt install python3-tk`
+
 ### Pokretanje aplikacije
 
 Za detaljan opis načina na koji se aplikacija poziva pokrenuti `python3 read_rpi.py -h`
